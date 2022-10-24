@@ -6,7 +6,7 @@ import { getCountries, getCountryInfo } from "../../store/reducers/diseases";
 
 const Header = () => {
   // States
-  const { countries, country } = useSelector((state) => state.disease);
+  const { countries, countryInfo } = useSelector((state) => state.disease);
   const dispatch = useDispatch();
 
   // Fecth all countries
@@ -17,11 +17,20 @@ const Header = () => {
     fetchCountries();
   }, []);
 
+  // Fecth worldwide cases
+  useEffect(() => {
+    const fecthWorldwide = async () =>
+      await dispatch(
+        getCountryInfo({ diseaseName: "covid-19", countryCode: "all" })
+      );
+    fecthWorldwide();
+  }, []);
+
   // Handle the select on change
   const selectChangeHandler = async (e) => {
     const countryCode = e.target.value;
-    const url =
-      countryCode === "worldwide" ? "all" : `countries/${countryCode}`;
+    const url = countryCode === "all" ? "all" : `countries/${countryCode}`;
+    console.log(url);
     await dispatch(
       getCountryInfo({ diseaseName: "covid-19", countryCode: url })
     );
@@ -34,10 +43,10 @@ const Header = () => {
       <FormControl className="header__dropdown">
         <Select
           variant="outlined"
-          value={country.countryCode}
+          value={countryInfo?.countryInfo?.iso2 || "all"}
           onChange={selectChangeHandler}
         >
-          <MenuItem value="worldwide">Worldwide</MenuItem>
+          <MenuItem value="all">Worldwide</MenuItem>
           {/* render a list of countries */}
           {countries.map((country) => (
             <MenuItem value={country.countryInfo.iso2} key={country.country}>

@@ -22,7 +22,6 @@ const diseasesSlice = createSlice({
   initialState: {
     diseaseName: "covid-19",
     countries: [],
-    country: { country: "worldwide", countryCode: "worldwide" },
     countryInfo: {},
     countryCode: "",
   },
@@ -31,11 +30,8 @@ const diseasesSlice = createSlice({
       state.countries = action.payload;
     },
     [getCountryInfo.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.countryInfo = action.payload;
-      state.country = {
-        country: action.payload.country,
-        countryCode: action.payload.countryInfo.iso2,
-      };
     },
   },
 });
