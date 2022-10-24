@@ -5,8 +5,24 @@
 }
 
 .app {
-  padding-left: 15px;
-  padding-right: 15px;
+  display: flex;
+  gap: 3%;
+}
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
+}
+
+.app__left {
+  flex: 1;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.app__right {
+  flex: 0.3;
 }
 
 .app__stats {
