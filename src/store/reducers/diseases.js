@@ -17,21 +17,33 @@ export const getCountryInfo = createAsyncThunk(
   }
 );
 
+export const getHistoricalData = createAsyncThunk(
+  "diseases/getHistoricalData",
+  async (diseaseName) => {
+    const response = await disease.get(
+      `/${diseaseName}/historical/all?lastdays=500`
+    );
+    return response.data;
+  }
+);
+
 const diseasesSlice = createSlice({
   name: "diseases",
   initialState: {
     diseaseName: "covid-19",
     countries: [],
     countryInfo: {},
-    countryCode: "",
+    historical: [],
   },
   extraReducers: {
     [getCountries.fulfilled]: (state, action) => {
       state.countries = action.payload;
     },
     [getCountryInfo.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.countryInfo = action.payload;
+    },
+    [getHistoricalData.fulfilled]: (state, action) => {
+      state.historical = action.payload;
     },
   },
 });

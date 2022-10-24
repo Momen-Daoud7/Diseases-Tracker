@@ -30,3 +30,7 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+.app__right__title {
+  margin: 15px 0;
+}
