@@ -36,6 +36,12 @@ const diseasesSlice = createSlice({
     historical: [],
     center: { lat: 34, lng: 1.6 },
     zoom: 3,
+    casesType: "cases",
+  },
+  reducers: {
+    changeCasesType(state, action) {
+      state.casesType = action.case;
+    },
   },
   extraReducers: {
     [getCountries.fulfilled]: (state, action) => {

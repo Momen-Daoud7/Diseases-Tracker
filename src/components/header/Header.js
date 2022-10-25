@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <h1>Covid 19 tracker</h1>
+      <h1>Disease Tracker</h1>
 
       <FormControl className="header__dropdown">
         <Select

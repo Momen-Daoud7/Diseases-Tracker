@@ -7,4 +7,11 @@
 
 .header__dropdown {
   background-color: white;
+  outline: none !important;
+}
+
+.header > h1 {
+  color: #fc3c3c;
+  font-size: 2rem;
+  text-transform: uppercase;
 }
