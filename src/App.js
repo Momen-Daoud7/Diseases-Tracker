@@ -6,6 +6,9 @@ import InfoBox from "./components/infoBox/InfoBox";
 import LineGraph from "./components/lineGraph/LineGraph";
 import Map from "./components/map/Map";
 import Table from "./components/table/Table";
+import "leaflet/dist/leaflet.css";
+import { useState } from "react";
+import { prettyPrintStat } from "./utils/utils";
 
 function App() {
   const { countryInfo } = useSelector((state) => state.disease);
@@ -14,16 +17,20 @@ function App() {
       <div className="app__left">
         <Header />
         <div className="app__stats">
-          <InfoBox title="Cases" cases={countryInfo.todayCases} total={12221} />
+          <InfoBox
+            title="Cases"
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
+          />
           <InfoBox
             title="Recoverd"
-            cases={countryInfo.todayRecovered}
-            total={12221}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
           />
           <InfoBox
             title="Death"
-            cases={countryInfo.todayDeaths}
-            total={12221}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
           />
         </div>
         <Map />

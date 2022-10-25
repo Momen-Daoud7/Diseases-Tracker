@@ -27,8 +27,8 @@
 
 .app__stats {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  gap: 10px;
 }
 
 .app__right__title {

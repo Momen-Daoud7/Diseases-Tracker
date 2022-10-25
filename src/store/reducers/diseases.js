@@ -34,6 +34,8 @@ const diseasesSlice = createSlice({
     countries: [],
     countryInfo: {},
     historical: [],
+    center: { lat: 34, lng: 1.6 },
+    zoom: 3,
   },
   extraReducers: {
     [getCountries.fulfilled]: (state, action) => {
@@ -41,6 +43,14 @@ const diseasesSlice = createSlice({
     },
     [getCountryInfo.fulfilled]: (state, action) => {
       state.countryInfo = action.payload;
+      console.log(action.payload);
+      if (typeof action.payload.countryInfo == "object") {
+        state.center = {
+          lat: action.payload.countryInfo.lat,
+          lng: action.payload.countryInfo.long,
+        };
+        state.zoom = 4;
+      }
     },
     [getHistoricalData.fulfilled]: (state, action) => {
       state.historical = action.payload;

@@ -75,12 +75,12 @@ const LineGraph = ({ caseType = "cases" }) => {
   // Fecth historical data
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getHistoricalData(diseaseName));
+      await dispatch(getHistoricalData(diseaseName)).unwrap();
       let chart = buildChartData(historical);
       setData(chart);
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

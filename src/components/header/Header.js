@@ -6,13 +6,15 @@ import { getCountries, getCountryInfo } from "../../store/reducers/diseases";
 
 const Header = () => {
   // States
-  const { countries, countryInfo } = useSelector((state) => state.disease);
+  const { countries, countryInfo, diseaseName } = useSelector(
+    (state) => state.disease
+  );
   const dispatch = useDispatch();
 
   // Fecth all countries
   useEffect(() => {
     const fetchCountries = async () => {
-      await dispatch(getCountries("covid-19")).unwrap();
+      await dispatch(getCountries(diseaseName)).unwrap();
     };
     fetchCountries();
   }, []);
@@ -20,9 +22,7 @@ const Header = () => {
   // Fecth worldwide cases
   useEffect(() => {
     const fecthWorldwide = async () =>
-      await dispatch(
-        getCountryInfo({ diseaseName: "covid-19", countryCode: "all" })
-      );
+      await dispatch(getCountryInfo({ diseaseName, countryCode: "all" }));
     fecthWorldwide();
   }, []);
 
@@ -31,9 +31,7 @@ const Header = () => {
     const countryCode = e.target.value;
     const url = countryCode === "all" ? "all" : `countries/${countryCode}`;
     console.log(url);
-    await dispatch(
-      getCountryInfo({ diseaseName: "covid-19", countryCode: url })
-    );
+    await dispatch(getCountryInfo({ diseaseName, countryCode: url }));
   };
 
   return (
